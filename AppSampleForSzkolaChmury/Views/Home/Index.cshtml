@@ -1,0 +1,45 @@
+﻿@model DashboardViewModel
+@using AppSampleForSzkolaChmury.Controllers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12"><h1>Last 10 expenses</h1></div>
+    <div class="col-md-12">
+        <form asp-action="AddRandom">
+            <button type="submit" class="btn btn-success">Add random</button>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>date</th>
+                <th>amount</th>
+                <th>category</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var expense in Model.LastExpenses)
+            {
+                <tr>
+                    <td>@expense.Id</td>
+                    <td>@expense.Date</td>
+                    <td>@expense.Amount PLN</td>
+                    <td>@expense.Category</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12">
+        <h3>Summary</h3>
+        @foreach (var category in Model.Report)
+        {
+            <p>@category.category: @category.value PLN</p>
+        }
+    </div>
+</div>
+
